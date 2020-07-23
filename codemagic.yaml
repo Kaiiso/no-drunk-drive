@@ -6,12 +6,13 @@ workflows:
         name: NoDrunkDrive
         environment:
             vars:
-                XCODE_WORKSPACE: "nodrunkdrive"
-                XCODE_SCHEME: "nodrunkdrive"
+                XCODE_WORKSPACE: "nodrunkdriveproject"
+                XCODE_SCHEME: "nodrunkdriveproject"
             xcode: latest
             cocoapods: default
         scripts:
             - xcodebuild build -workspace "$XCODE_WORKSPACE.xcworkspace" -scheme "$XCODE_SCHEME" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+            - cd $FCI_BUILD_DIR && ./gradlew build
         artifacts:
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
